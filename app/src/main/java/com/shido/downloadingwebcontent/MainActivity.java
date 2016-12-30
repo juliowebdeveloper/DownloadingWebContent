@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -135,9 +137,16 @@ public class MainActivity extends AppCompatActivity {
          //Snackbar.make(fab, "Button Tapped", Snackbar.LENGTH_LONG).show();
         DownloadImageTask downloadImageTask = new DownloadImageTask();
         try {
-            Bitmap bitmap = downloadImageTask.execute("http://pictures-of-cats.org/wp-content/uploads/images/cat-images-19.jpg").get();
-            imgView.setImageBitmap(bitmap);
-
+            if(1==2) {
+                Bitmap bitmap = downloadImageTask.execute("http://pictures-of-cats.org/wp-content/uploads/images/cat-images-19.jpg").get();
+                imgView.setImageBitmap(bitmap);
+            }
+            //Usando Picasso ao inves do asynctask
+                Picasso.with(this)
+                    .load("https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg")
+                    .placeholder(android.R.drawable.btn_star)
+                    .error(android.R.drawable.stat_notify_error)
+                    .into(imgView);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
